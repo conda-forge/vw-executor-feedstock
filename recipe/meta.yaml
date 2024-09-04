@@ -15,16 +15,18 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
     - pip
     - python >=3.6
+    - setuptools
   run:
     - pandas >=1.0.0
     - python >=3.6
     - tqdm >=4.0.0
+  run_constrained:
     - vowpalwabbit >=8.10.0
 
 test:
@@ -34,6 +36,7 @@ test:
     - pip check
   requires:
     - pip
+    - vowpalwabbit
 
 about:
   home: https://github.com/VowpalWabbit/data-science
