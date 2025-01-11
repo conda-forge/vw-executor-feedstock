@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/vw-executor-{{ version }}.tar.gz
+  - url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/vw-executor-{{ version }}.tar.gz
     sha256: 71b270008f4665b7569e0c24b05f3320eafb6e0ea23a1d5192f34a3177453476
   - url: https://raw.githubusercontent.com/VowpalWabbit/data-science/master/LICENSE.txt
     fn: LICENSE.txt
@@ -15,16 +15,16 @@ source:
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 1
+  number: 2
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools
   run:
     - pandas >=1.0.0
-    - python >=3.6
+    - python >={{ python_min }}
     - tqdm >=4.0.0
   run_constrained:
     - vowpalwabbit >=8.10.0
@@ -37,6 +37,7 @@ test:
   requires:
     - pip
     - vowpalwabbit
+    - python {{ python_min }}
 
 about:
   home: https://github.com/VowpalWabbit/data-science
